@@ -69,9 +69,14 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $PWD/.logtail.yaml)")
 }
 
+func initViperDefault() {
+	viper.SetDefault("push", []string{"stdout"});
+	viper.SetDefault("format", "json");
+}
+
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	viper.SetDefault("push", []string{"stdout"});
+	initViperDefault()
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
@@ -93,4 +98,6 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+
+	//fmt.Println(viper.AllSettings())
 }
