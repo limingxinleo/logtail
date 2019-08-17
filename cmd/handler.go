@@ -15,15 +15,14 @@ func init() {
 }
 
 func push(text string) {
-	handlers := viper.GetStringMap("push")
-
-	for name := range handlers {
+	handlers := viper.GetStringSlice("push")
+	for _, name := range handlers {
 		if handlerMap[name] == nil {
 			log.Println("Handler" + name + "is not found.")
 			return
 		}
 
-		t := reflect.ValueOf(handlers[name]).Type()
+		t := reflect.ValueOf(handlerMap[name]).Type()
 		h := reflect.New(t).Elem().Interface().(handler.HandlerInterface)
 
 		h.Handle(text)
