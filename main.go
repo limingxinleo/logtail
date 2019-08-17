@@ -18,5 +18,5 @@ package main
 import "github.com/limingxinleo/logtail/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

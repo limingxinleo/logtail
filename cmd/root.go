@@ -71,11 +71,11 @@ func init() {
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
+	viper.SetDefault("push", []string{"stdout"});
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Find home directory.
 		dir, err := os.Getwd()
 		if err != nil {
 			fmt.Println(err)
